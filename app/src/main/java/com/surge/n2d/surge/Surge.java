@@ -12,6 +12,7 @@ package com.surge.n2d.surge;
     import android.os.Handler;
     import android.os.Message;
     import android.util.Log;
+    import android.view.DragEvent;
     import android.view.Menu;
     import android.view.MenuInflater;
     import android.view.MenuItem;
@@ -19,6 +20,7 @@ package com.surge.n2d.surge;
     import android.view.Window;
     import android.view.View.OnClickListener;
     import android.widget.Button;
+    import android.widget.ImageView;
     import android.widget.TextView;
     import android.widget.Toast;
 /**
@@ -88,6 +90,24 @@ public class Surge extends Activity implements OnClickListener{
         DisplayPowerValue = (TextView) findViewById(R.id.powerValue);
         mGraph = (GraphView)findViewById(R.id.graph);
         mGraph.setMaxValue(800);
+        ImageView imv=(ImageView)findViewById(R.id.logo);
+        imv.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent serverIntent = new Intent(Surge.this, DeviceListActivity.class);
+                startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE);
+
+
+            }
+        });
+
+        imv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ensureDiscoverable();
+                return false;
+            }
+        });
         ConnectBtn.setOnClickListener(this);
         DisconnectBtn.setOnClickListener(this);
 // If the adapter is null, then Bluetooth is not supported
@@ -176,6 +196,9 @@ public class Surge extends Activity implements OnClickListener{
             Intent discoverableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
             discoverableIntent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
             startActivity(discoverableIntent);
+        }
+        else{
+            Toast.makeText(getApplicationContext(),"Currently it is discoverable",Toast.LENGTH_LONG).show();
         }
     }
     /**
