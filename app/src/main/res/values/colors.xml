@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <color name="connected_on">#ff00ff00</color>
+    <color name="connected_off">#2000ff00</color>
+    <color name="disconnected_on">#ffff0000</color>
+    <color name="disconnected_off">#30ff0000</color>
+    <color name="title">#000000</color>
+    <color name="title2">#ffffff</color>
+    <color name="colorAccent">#ffff0000</color>
+    <color name="colorPrimary">#ffff0000</color>
+    <color name="colorPrimaryDark">#ffff0000</color>
+</resources>
